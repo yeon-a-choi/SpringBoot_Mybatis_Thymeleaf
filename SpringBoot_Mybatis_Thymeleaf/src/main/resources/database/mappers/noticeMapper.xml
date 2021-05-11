@@ -11,5 +11,9 @@
 	  			(select * from notice order by num desc) N)
 	  	where R between 1 and 10
   	</select>
+  	
+  	<select id="getSelect" parameterType="BoardVO" resultType="NoticeVO">
+  		select * from notice where num = #{num}
+  	</select>
   
   </mapper>

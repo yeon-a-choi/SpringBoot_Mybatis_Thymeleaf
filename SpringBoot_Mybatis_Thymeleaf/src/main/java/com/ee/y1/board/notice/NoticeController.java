@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ee.y1.board.BoardVO;
 
@@ -19,7 +20,7 @@ public class NoticeController {
 	private NoticeService noticeService; 
 	
 	@ModelAttribute("board")
-	public String getBoard() {
+	public String getBoard() throws Exception {
 		return "notice";
 	}
 	
@@ -30,5 +31,17 @@ public class NoticeController {
 		return "board/list";
 	}
 	
+	@GetMapping("select")
+	public ModelAndView getSelect(BoardVO boardVO) throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		
+		boardVO = noticeService.getSelect(boardVO);
+		
+		mv.addObject("vo", boardVO);
+		mv.setViewName("board/select");
+		
+		return mv;
+	}
 
 }

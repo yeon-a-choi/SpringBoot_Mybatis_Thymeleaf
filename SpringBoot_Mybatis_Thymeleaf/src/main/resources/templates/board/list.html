@@ -2,17 +2,61 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/fragments/default :: head(|${board}List|)">
 <meta charset="UTF-8">
-<title>Member Join</title>
+<title>Home</title>
 </head>
 <body>
-	<!-- header -->
-	<div th:replace="/fragments/default :: header"></div>
-	<!-- Jumbo -->
-	<div th:replace="/fragments/default :: jumbo"></div>
 	
-	<h1 th:text="${board}"></h1>
-	<!-- footer -->
-	<div th:replace="/fragments/default :: footer"></div>
+	<div th:replace="fragments/default :: header"></div>
+	
+	<div th:replace="fragments/default :: jumbo"></div>
+	
+	<div class="container">
+		<h2 th:text="${board}"></h2>
+	
+		<table class="table">
+			  <thead class="thead-dark">
+			    <tr>
+			      <th scope="col">Num</th>
+			      <th scope="col">Title</th>
+			      <th scope="col">Writer</th>
+			      <th scope="col">Date</th>
+			      <th scope="col">Hit</th>
+			      <th scope="col">Index</th>
+			      <th scope="col">Count</th>
+			      <th scope="col">Size</th>
+			      <th scope="col">Even</th>
+			      <th scope="col">Odd</th>
+			      <th scope="col">First</th>
+			      <th scope="col">Last</th>
+			      <!-- <th scope="col">Current</th> -->
+			    </tr>
+			  </thead>
+			  <tbody>
+			  		<!-- 상태번호를 담을 변수 : state -->
+			    <tr th:each="vo, state : ${list}">
+			      <th scope="row" th:text="${vo.num}"></th>
+			      <!-- td안에 하나의 태그를 더 넣어야한다면 거기에다가 th속성을 걸어줘야 나옴 -->
+			      							<!-- @{|${board}select|} -->
+			      <td><a href="#" th:href="@{select(num=${vo.num})}" th:text="${vo.title}"></a></td>
+			      <td th:text="${vo.writer}"></td>
+			      <td th:text="${vo.regDate}"></td>
+			      <td th:text="${vo.hit}"></td>
+			      <td th:text="${state.index}"></td> <!-- 인덱스 번호 0부터 시작 / 변수가 다르면 안됨! index여야만 가능 -->
+			      <td th:text="${state.count}"></td> <!-- 횟수 번호 1부터 시작 -->
+			      <td th:text="${state.size}"></td> <!-- 총 갯수 : list의 size와 같다 -->
+			      <td th:text="${state.even}"></td> <!-- 현재 반복의 짝수 여부 -->
+			      <td th:text="${state.odd}"></td> <!-- 현재 반복의 홀수 여부 -->
+			      <td th:text="${state.first}"></td> <!-- 현재 반복이 첫번째 여부 -->
+			      <td th:text="${state.last}"></td> <!-- 현재 반복이 마지막인지 여부 -->
+			     <!-- <td th:text="${state.current}"></td>  현재 요소 -->
+			    </tr>
+			    
+			  </tbody>
+		</table>
+		
+	</div>
+	
+	<footer th:replace="/fragments/default :: footer"></footer>
 
 </body>
 </html>

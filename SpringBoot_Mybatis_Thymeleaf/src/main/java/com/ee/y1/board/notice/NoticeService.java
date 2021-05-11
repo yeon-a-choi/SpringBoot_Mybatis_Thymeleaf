@@ -23,7 +23,7 @@ public class NoticeService implements BoardService{
 	@Override
 	public BoardVO getSelect(BoardVO boardVO) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return noticeMapper.getSelect(boardVO);
 	}
 
 	@Override
