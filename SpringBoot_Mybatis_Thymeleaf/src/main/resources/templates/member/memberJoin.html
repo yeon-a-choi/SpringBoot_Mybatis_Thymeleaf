@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/default :: head ('Home')">
+<head th:replace="fragments/default :: head ('Member Join')">
 <meta charset="UTF-8">
-<title>Home</title>
+<title>Member Join</title>
 </head>
 <body>
-	
+
+	<!-- header -->
 	<div th:replace="fragments/default :: header"></div>
 	
+	<!-- jumbo -->
 	<div th:replace="fragments/default :: jumbo"></div>
 	
+	
+	<!-- /member/memberJoin -->
+	<!-- com.ee.y1.member.MemberController.setJoin -->
+	
+	<h1>Member Join Page</h1>
+	
+	<!-- footer -->
 	<footer th:replace="/fragments/default :: footer"></footer>
 
 </body>
