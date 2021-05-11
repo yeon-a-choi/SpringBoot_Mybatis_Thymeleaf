@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.ee.y1.board.notice.NoticeMapper">
+  
+  	<select id="getList" resultType="NoticeVO">
+  		select * from
+	  		(select rownum R, N.* from
+	  			(select * from notice order by num desc) N)
+	  	where R between 1 and 10
+  	</select>
+  
+  </mapper>

@@ -2,7 +2,7 @@ package com.ee.y1.board;
 
 import java.util.List;
 
-public interface BoardMapper {
+public interface BoardMapper{
 	
 	//List
 	public List<BoardVO> getList() throws Exception;
