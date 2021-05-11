@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/fragments/default :: head(|${board}List|)">
+<head th:replace="/fragments/default :: head('MemberLogin')">
 <meta charset="UTF-8">
 <title>Member Join</title>
 </head>
@@ -9,8 +9,9 @@
 	<div th:replace="/fragments/default :: header"></div>
 	<!-- Jumbo -->
 	<div th:replace="/fragments/default :: jumbo"></div>
-	
-	<h1 th:text="${board}"></h1>
+	<!-- /member/memberJoin -->
+	<!-- com....member.MemberController.setJoin() -->
+	<h1>Member Login Page</h1>
 	<!-- footer -->
 	<div th:replace="/fragments/default :: footer"></div>
 

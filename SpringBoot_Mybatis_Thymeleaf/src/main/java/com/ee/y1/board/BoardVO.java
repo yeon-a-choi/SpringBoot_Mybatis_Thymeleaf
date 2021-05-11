@@ -12,13 +12,13 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
-@Getter				//getter 메서드
-@Setter				//setter 메서드
-@ToString			//toString override
-@NoArgsConstructor  //default 생성자
-@AllArgsConstructor //모든 매개변수가 있는 생성자
-@EqualsAndHashCode	//hash, equals 메서드
-@RequiredArgsConstructor //필수 매개변수만 있는 생성자 생성
+@Getter						//getter 메서드
+@Setter						//setter 메서드
+@ToString					//toString override
+@NoArgsConstructor  		//default 생성자
+@AllArgsConstructor 		//모든 매개변수가 있는 생성자
+@EqualsAndHashCode			//hash, equals 메서드
+@RequiredArgsConstructor 	//필수 매개변수만 있는 생성자 생성
 */
 
 @Data				//lombok에 있는 모든 annotation 선언과 같음
