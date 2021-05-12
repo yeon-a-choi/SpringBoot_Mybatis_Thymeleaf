@@ -6,14 +6,16 @@
   <mapper namespace="com.ee.y1.board.notice.NoticeMapper">
   
   	<select id="getList" resultType="NoticeVO">
-  		select * from
-	  		(select rownum R, N.* from
-	  			(select * from notice order by num desc) N)
-	  	where R between 1 and 10
+  		select * from notice order by num desc
   	</select>
   	
   	<select id="getSelect" parameterType="BoardVO" resultType="NoticeVO">
   		select * from notice where num = #{num}
   	</select>
+  	
+  	<insert id="setInsert" parameterType="BoardVO">
+   			insert into notice values(#{num}, #{title}, #{writer},#{contents}, now(), 0)
+   	</insert>
+   
   
   </mapper>

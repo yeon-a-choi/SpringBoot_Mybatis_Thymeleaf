@@ -29,7 +29,7 @@ public class NoticeService implements BoardService{
 	@Override
 	public int setInsert(BoardVO boardVO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return noticeMapper.setInsert(boardVO);
 	}
 
 	@Override
