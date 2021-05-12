@@ -20,7 +20,7 @@ public class Pager {
 	
 
 	public void makeNum(Long totalCount) {
-		int perBlock = 5;
+		int perBlock=5;
 		//1. totalCount
 		
 		//2. totalCount를 이용해서 totalPage수 구하기
@@ -28,16 +28,15 @@ public class Pager {
 		if(totalCount % this.getCurPage() != 0) {
 			totalPage++;
 		}
-		
 		//3. totalPage를 이용해서 totalBlock 수 구하기
 		Long totalBlock = totalPage / perBlock;
-		if(totalPage % perBlock != 0) {
+		if(totalPage % perBlock !=0) {
 			totalBlock++;
 		}
 		
 		//4. curPage를 이용해서 curBlock 구하기
 		Long curBlock = this.getCurPage() / perBlock;
-		if(this.curPage % perBlock != 0) {
+		if(this.curPage % perBlock !=0) {
 			curBlock++;
 		}
 		
@@ -48,7 +47,6 @@ public class Pager {
 		//6. curBlock이 마지막(totalBlock)
 		this.pre = true;
 		this.next = true;
-		
 		if(curBlock == totalBlock) {
 			lastNum = totalPage;
 			this.next = false;
