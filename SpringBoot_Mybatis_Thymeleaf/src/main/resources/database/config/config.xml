@@ -9,7 +9,8 @@
 		<typeAlias type="com.ee.y1.board.BoardVO" alias="BoardVO"/>
 		<typeAlias type="com.ee.y1.board.notice.NoticeVO" alias="NoticeVO"/>
 		
-		<typeAlias type="com.iu.s1.util.Pager" alias="Pager"/>
+		<typeAlias type="com.ee.y1.util.Pager" alias="Pager"/>
+		<typeAlias type="java.lang.Long" alias="Long"/>
 		
 	</typeAliases>
 </configuration>  

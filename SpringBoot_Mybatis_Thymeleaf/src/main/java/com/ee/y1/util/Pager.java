@@ -14,6 +14,10 @@ public class Pager {
 	private boolean pre;
 	private boolean next;
 	
+	//Search 변수
+	private String kind;
+	private String search;
+	
 
 	public void makeNum(Long totalCount) {
 		int perBlock = 5;
@@ -38,8 +42,8 @@ public class Pager {
 		}
 		
 		//5. curBlock를 이용해서 startNum, lastNum 구하기
-		startNum = (curBlock-1) * perBlock+1;
-		lastNum = curBlock * perBlock;
+		this.startNum = (curBlock-1) * perBlock+1;
+		this.lastNum = curBlock * perBlock;
 		
 		//6. curBlock이 마지막(totalBlock)
 		this.pre = true;
@@ -136,6 +140,31 @@ public class Pager {
 
 	public void setNext(boolean next) {
 		this.next = next;
+	}
+	
+	
+	
+	//search
+	public String getKind() {
+		return kind;
+	}
+
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+
+	public String getSearch() {
+		if(search == null) {
+			search = "";
+		}
+		return search;
+	}
+
+	public void setSearch(String search) {
+		if(search == null) {
+			search = "";
+		}
+		this.search = search;
 	}
 
 }
