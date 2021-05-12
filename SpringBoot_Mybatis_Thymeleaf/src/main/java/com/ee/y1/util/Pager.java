@@ -23,16 +23,20 @@ public class Pager {
 		int perBlock=5;
 		//1. totalCount
 		
+		
 		//2. totalCount를 이용해서 totalPage수 구하기
 		Long totalPage = totalCount / this.getPerPage();
-		if(totalCount % this.getCurPage() != 0) {
+		if(totalCount % this.getPerPage() != 0) {
 			totalPage++;
 		}
+		
+		
 		//3. totalPage를 이용해서 totalBlock 수 구하기
 		Long totalBlock = totalPage / perBlock;
 		if(totalPage % perBlock !=0) {
 			totalBlock++;
 		}
+		
 		
 		//4. curPage를 이용해서 curBlock 구하기
 		Long curBlock = this.getCurPage() / perBlock;
@@ -40,13 +44,19 @@ public class Pager {
 			curBlock++;
 		}
 		
+		
 		//5. curBlock를 이용해서 startNum, lastNum 구하기
 		this.startNum = (curBlock-1) * perBlock+1;
 		this.lastNum = curBlock * perBlock;
 		
+		System.out.println("startNum : "+startNum);
+		System.out.println("lastNum : "+lastNum);
+		
+		
 		//6. curBlock이 마지막(totalBlock)
 		this.pre = true;
 		this.next = true;
+		
 		if(curBlock == totalBlock) {
 			lastNum = totalPage;
 			this.next = false;
@@ -69,28 +79,33 @@ public class Pager {
 
 	public Long getCurPage() {
 		if(this.curPage == null || this.curPage==0) {
-			this.curPage=1L;
+			this.curPage = 1L;
 		}
+		
 		return curPage;
 	}
 
 	public void setCurPage(Long curPage) {
+		
 		if(curPage == null || curPage==0) {
-			this.curPage=1L;
-		}else {
+			this.curPage = 1L;
+		} else {
 			this.curPage = curPage;
 		}
 	}
 
 	public Long getPerPage() {
+		
 		if(this.perPage == null || this.perPage==0) {
-			this.perPage=10L;
+			this.perPage = 10L;
 		}
+		
 		return perPage;
 	}
 
 	public void setPerPage(Long perPage) {
-		if(perPage==null || perPage==0) {
+		
+		if(perPage == null || perPage == 0) {
 			this.perPage=10L;
 		}else {
 			this.perPage = perPage;

@@ -17,22 +17,23 @@ public class NoticeService implements BoardService{
 
 	@Override
 	public List<BoardVO> getList(Pager pager) throws Exception {
-		// TODO Auto-generated method stub
 		pager.makeRow();
 		Long totalCount = noticeMapper.getTotalCount(pager);
 		pager.makeNum(totalCount);
+		
+		System.out.println("startNum : "+pager.getStartNum());
+		System.out.println("lastNum : "+pager.getLastNum());
+		
 		return noticeMapper.getList(pager);
 	}
 
 	@Override
 	public BoardVO getSelect(BoardVO boardVO) throws Exception {
-		// TODO Auto-generated method stub
 		return noticeMapper.getSelect(boardVO);
 	}
 
 	@Override
 	public int setInsert(BoardVO boardVO) throws Exception {
-		// TODO Auto-generated method stub
 		return noticeMapper.setInsert(boardVO);
 	}
 
