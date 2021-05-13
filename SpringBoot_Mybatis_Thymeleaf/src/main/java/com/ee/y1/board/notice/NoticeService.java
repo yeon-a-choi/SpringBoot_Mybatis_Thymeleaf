@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ee.y1.board.BoardService;
 import com.ee.y1.board.BoardVO;
+import com.ee.y1.util.FileManager;
 import com.ee.y1.util.Pager;
 
 @Service
@@ -15,6 +16,9 @@ public class NoticeService implements BoardService{
 	
 	@Autowired
 	private NoticeMapper noticeMapper;
+	
+	@Autowired
+	private FileManager fileManager;
 
 	@Override
 	public List<BoardVO> getList(Pager pager) throws Exception {
@@ -37,9 +41,19 @@ public class NoticeService implements BoardService{
 	@Override
 	public int setInsert(BoardVO boardVO, MultipartFile [] files) throws Exception {
 		
+		String filePath = "upload/notice/";
 		
+		for(MultipartFile multipartFile : files) {
+			
+			if(multipartFile.getSize() == 0) {
+				continue;
+			}
+			
+			String fileName = fileManager.save(multipartFile, filePath);
+			System.out.println(fileName);
+		}
 		
-		return noticeMapper.setInsert(boardVO);
+		return 0;//noticeMapper.setInsert(boardVO);
 	}
 
 	@Override

@@ -60,11 +60,11 @@ public class NoticeController {
 	@PostMapping("insert")
 	public String setInsert(BoardVO boardVO, MultipartFile [] files)throws Exception{
 		
-//		System.out.println(files.length);
-//		
-//		for(MultipartFile f : files) {
-//			System.out.println(f.getOriginalFilename());
-//		}
+		System.out.println(files.length);
+		
+		for(MultipartFile f : files) {
+			System.out.println(f.getOriginalFilename());
+		}
 		
 		int result = noticeService.setInsert(boardVO, files);
 		
