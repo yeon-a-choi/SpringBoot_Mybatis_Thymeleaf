@@ -62,6 +62,8 @@ public class FileManager {
 		//2. 저장할 파일명을 생성
 		String fileName = UUID.randomUUID().toString()+"_"+multipartFile.getOriginalFilename();
 		
+		System.out.println("fileName : "+fileName);
+		
 		file = new File(file, fileName);
 		
 		//transfer
@@ -69,7 +71,7 @@ public class FileManager {
 		//아래와 같음 ,  transfer가 진행되야 파일이 넘어감
 		//FileCopyUtils.copy(multipartFile.getBytes(), file);
 		
-		return "";
+		return fileName;
 	}
 
 }

@@ -3,6 +3,7 @@ package com.ee.y1.board;
 import java.util.List;
 
 import com.ee.y1.util.Pager;
+import com.ee.y1.board.BoardFileVO;
 
 public interface BoardMapper{
 	
@@ -17,6 +18,9 @@ public interface BoardMapper{
 	
 	//Insert
 	public int setInsert(BoardVO boardVO) throws Exception;
+	
+	//File Insert
+	public int setFileInsert(BoardFileVO boardFileVO) throws Exception;
 	
 	//Update
 	public int setUpdate(BoardVO boardVO) throws Exception;
