@@ -12,7 +12,12 @@
 	
 	<div class="container">
 		<h2 th:text="${vo.title}"></h2>
-		<h2 th:text="${vo.contents}"></h2>
+		<!-- utest는 HTML 문법은 문법으로 인식하게 해주고 텍스트는 텍스트로 인식 -->
+		<h2 th:utext="${vo.contents}"></h2>
+		
+		<a th:href="@{./update(num=${vo.num})}" class="btn btn-success">Update</a>
+		<a th:href="@{./delete(num=${vo.num})}" class="btn btn-danger">Delete</a>
+		
 	</div>
 	
 	<footer th:replace="/fragments/default :: footer"></footer>

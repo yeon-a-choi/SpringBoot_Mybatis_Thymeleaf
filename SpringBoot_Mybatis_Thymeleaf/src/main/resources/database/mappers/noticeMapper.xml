@@ -50,9 +50,22 @@
   		select * from notice where num = #{num}
   	</select>
   	
+ 	<update id="setHitUpdate" parameterType="BoardVO">
+ 		update notice set hit=hit+1 where num=#{num}
+ 	</update>
+  	
   	<insert id="setInsert" parameterType="BoardVO">
-   			insert into notice values(#{num}, #{title}, #{writer},#{contents}, now(), 0)
+   		insert into notice values(#{num}, #{title}, #{writer},#{contents}, now(), 0)
    	</insert>
+   	
+    <update id="setUpdate" parameterType="BoardVO">
+    	update notice set title = #{title}, writer = #{writer}, contents = #{contents}, hit = 0, regdate = now() 
+    	where num = #{num}
+    </update>
+   	
+   	<delete id="setDelete" parameterType="BoardVO">
+   		delete from notice where num=#{num}
+   	</delete>
    
   
   </mapper>
