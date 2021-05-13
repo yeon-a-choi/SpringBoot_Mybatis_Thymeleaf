@@ -27,6 +27,7 @@ public class NoticeController {
 		return "notice";
 	}
 	
+	//List
 	@GetMapping("list")
 	public String getList(Model model, Pager pager)throws Exception{
 		List<BoardVO> ar = noticeService.getList(pager);
@@ -35,6 +36,7 @@ public class NoticeController {
 		return "board/list";
 	}
 	
+	//Select
 	@GetMapping("select")
 	public ModelAndView getSelect(BoardVO boardVO) throws Exception{
 		
@@ -48,6 +50,7 @@ public class NoticeController {
 		return mv;
 	}
 	
+	//Insert
 	@GetMapping("insert")
 	public String setInsert(Model model)throws Exception{
 		
@@ -71,6 +74,8 @@ public class NoticeController {
 		return "redirect:./list";
 	}
 	
+	
+	//Update
 	@GetMapping("update")
 	public ModelAndView setUpdate(BoardVO boardVO) throws Exception{
 		
@@ -95,6 +100,7 @@ public class NoticeController {
 	}
 	
 	
+	//Delete
 	@GetMapping("delete")
 	public String setDelete(BoardVO boardVO) throws Exception{
 		
