@@ -3,6 +3,7 @@ package com.ee.y1.board.qna;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ee.y1.board.BoardService;
@@ -10,6 +11,7 @@ import com.ee.y1.board.BoardVO;
 import com.ee.y1.util.FileManager;
 import com.ee.y1.util.Pager;
 
+@Service
 public class QnaService implements BoardService{
 	
 	@Autowired
@@ -51,7 +53,7 @@ public class QnaService implements BoardService{
 			
 			String fileName = fileManager.save(multipartFile, filePath);
 			
-			BoardVO boardVO = new BoardVO(); 
+			boardVO = new BoardVO(); 
 			
 		}
 		
