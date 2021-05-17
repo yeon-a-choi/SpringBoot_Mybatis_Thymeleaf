@@ -29,13 +29,26 @@
 	      <li class="nav-item">
 	        <a class="nav-link" th:href="@{/qna/list}">Qna</a>
 	      </li>
+	    </ul>
+	    
+	    <ul th:if="${session.member != null}" class="navbar-nav mr-auto mt-2 mt-lg-0">	    
+	      <li class="nav-item">
+	        <a class="nav-link" th:href="@{/member/page}">Mypage</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" th:href="@{/member/logout}">Logout</a>
+	      </li>   	    
+	    </ul>
+	    
+	    <ul th:if="${session.member == null}" class="navbar-nav mr-auto mt-2 mt-lg-0">	    
 	      <li class="nav-item">
 	        <a class="nav-link" th:href="@{/member/join}">Join</a>
 	      </li>
 	      <li class="nav-item">
 	        <a class="nav-link" th:href="@{/member/login}">Login</a>
-	      </li>
+	      </li>   	    
 	    </ul>
+	    
 	    <form class="form-inline my-2 my-lg-0">
 	      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 	      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -50,12 +63,12 @@
 	  </div>
 	</div>
 	
-					<!-- 경로와파일명 :: id -->
+	<!-- 경로와파일명 :: id 
 	<div class="insert" th:insert="/fragments/frag :: copy"></div>
 	
 	<div class="replace" th:replace="/fragments/frag :: copy"></div>
 	
-	<div class="include" th:include="/fragments/frag :: copy"></div>
+	<div class="include" th:include="/fragments/frag :: copy"></div> -->
    
 	<footer class="footer mt-auto py-3 bg-dark" th:fragment="footer">
 	  <div class="container">

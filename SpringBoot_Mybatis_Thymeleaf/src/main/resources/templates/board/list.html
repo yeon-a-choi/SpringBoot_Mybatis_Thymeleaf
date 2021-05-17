@@ -89,8 +89,10 @@
 		   </tbody>
 		 </table> 
 		 
-		 <a href="#" class="btn btn-primary" th:href="@{./fileDown}">FileDown</a>
-		 <a href="#" class="btn btn-primary" th:href="@{./insert}">WRITE</a>
+		 <div th:if="${session.member != null}">
+		 	<a href="#" th:if="${board =='notice' and session.member.username=='admin'}"  class="btn btn-primary" th:href="@{./insert}">WRITE</a>
+		 	<a href="#" th:if="${board !='notice'}"  class="btn btn-primary" th:href="@{./insert}">WRITE</a>
+		 </div>
 	</div>
 	
 	<div class="container d-flex justify-content-center">

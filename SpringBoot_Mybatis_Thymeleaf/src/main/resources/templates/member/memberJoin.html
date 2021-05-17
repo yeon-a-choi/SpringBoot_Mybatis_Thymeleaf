@@ -21,11 +21,11 @@
 		<br>
 		<h2>Member Join Page</h2>
 		
-		<form id="frm" action="./memberJoin" th:action="@{./Join}"  method="post" enctype="multipart/form-data">
+		<form id="frm" action="./memberJoin" th:action="@{./join}"  method="post" enctype="multipart/form-data">
 			<!-- ID -->
 			<div class="form-group">
-				<label for="id">ID</label> 
-				<input type="text" class="form-control" id="id" name="id"
+				<label for="username">ID</label> 
+				<input type="text" class="form-control" id="username" name="username"
 				aria-describedby="idHelp">
 				<h4 id=idResult></h4>
 				<h4 id=idCheckResult></h4>
@@ -35,8 +35,8 @@
 			
 			<!-- Password -->
 			<div class="form-group">
-				<label for="pw">Password</label> 
-				<input type="password" class="form-control" id="pw" name="pw">
+				<label for="password">Password</label> 
+				<input type="password" class="form-control" id="password" name="password">
 				<h4 id="pwResult"></h4>
 				<!-- PW는 8글자 이상 -->
 			</div>

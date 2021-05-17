@@ -22,12 +22,35 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	//login
 	@GetMapping("login")
 	public String memberLogin() throws Exception{		
 		return "member/memberLogin";
 	}
 	
-
+	@PostMapping("login")
+	public String getLogin(MemberVO memberVO, HttpSession session)throws Exception{
+		
+		memberVO = memberService.memberLogin(memberVO);
+		
+		if(memberVO != null) {
+			session.setAttribute("member", memberVO);
+		}	
+		
+		return "redirect:/";
+	}
+	
+	
+	//logout
+	@GetMapping("logout")
+	public String logout(HttpSession session)throws Exception{
+		session.invalidate();
+		
+		return "redirect:../";
+	}
+	
+	
+	//join
 	@GetMapping("join")
 	public String setmemberJoin() throws Exception {
 		return "member/memberJoin";

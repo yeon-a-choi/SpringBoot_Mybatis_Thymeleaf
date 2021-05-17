@@ -13,8 +13,9 @@
 
 	
 	<!-- member Join -->
-	<insert id="setMemberJoin" parameterType="MemberVO">	
-		insert into member(username, password, name, phone, email) 
+	<insert id="setMemberJoin" parameterType="MemberVO">
+		<!-- ignore안쓰면 중복실행되서 오류남 / 참고 : https://til.songyunseop.com/mysql/some_case_insert_with_duplicated_key.html -->
+		insert IGNORE into member(username, password, name, phone, email) 
 		values(#{username}, #{password}, #{name}, #{phone}, #{email})	
 	</insert>
 	
