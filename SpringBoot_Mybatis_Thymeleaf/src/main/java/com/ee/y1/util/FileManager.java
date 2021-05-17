@@ -16,7 +16,9 @@ public class FileManager {
 	@Autowired
 	private ResourceLoader resourceLoader;
 	
-	public String save(MultipartFile multipartFile, String filePath) throws Exception {
+	
+	//save
+	public String save(String filePath, MultipartFile multipartFile) throws Exception {
 		
 		//filePath : /resources/static/ 제외한 하위경로
 		
@@ -33,12 +35,12 @@ public class FileManager {
 		 * ResourceLoader
 		 * classpath 경로를 받아오기 위해 사용
 		
-/**	
+		/**	
 		//1. 경로 설정			만약 폴더이름이 틀리거나 없으면 오류남
 		String path = "classpath:/static/";
 			
 		File file = new File(resourceLoader.getResource(path).getFile(), filePath);
-*/		
+		*/		
 		
 		/**
 		 * ClassPathResource
@@ -72,6 +74,24 @@ public class FileManager {
 		//FileCopyUtils.copy(multipartFile.getBytes(), file);
 		
 		return fileName;
+	}
+	
+	
+	//delete
+	public boolean delete(String filePath, String fileName) throws Exception{
+		
+		String path = "static";
+		ClassPathResource classPathResource = new ClassPathResource(path);
+														//뒤에 오는 주소
+		File file = new File(classPathResource.getFile(), filePath);
+		
+		boolean check = false;
+		
+		if(file.exists()) {
+			check = file.delete();
+		}
+		
+		return check;
 	}
 
 }

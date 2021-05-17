@@ -7,11 +7,38 @@
 <body>
 	<!-- header -->
 	<div th:replace="/fragments/default :: header"></div>
+	
 	<!-- Jumbo -->
 	<div th:replace="/fragments/default :: jumbo"></div>
-	<!-- /member/memberJoin -->
-	<!-- com....member.MemberController.setJoin() -->
-	<h1>Member Login Page</h1>
+	
+	<div class="container">
+		
+		<br>
+		<h2>Member Login Page</h2>
+		
+		<form action="./login" method="post">
+			<div class="form-group">
+				<!-- label for의 값은 id와 동일하게 -->
+				<label for="id">ID</label>
+				<input type="text" class="form-control" id="id" name="id" aria-describedby="idHelp"> 
+				<small id="idHelp" class="form-text text-muted">
+					We'll never share your id with anyone else.
+				</small>
+			</div>
+			
+			
+			<div class="form-group">
+				<label for="pw">Password</label> <input
+					type="password" class="form-control" id="pw" name="pw">
+			</div>
+			
+
+			<button type="submit" class="btn btn-primary">Submit</button>
+			
+		</form>
+
+	</div>
+	
 	<!-- footer -->
 	<div th:replace="/fragments/default :: footer"></div>
 

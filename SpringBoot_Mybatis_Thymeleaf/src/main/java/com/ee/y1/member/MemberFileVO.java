@@ -10,5 +10,4 @@ public class MemberFileVO {
 	private String fileName;
 	private String oriName;
 
-
 }

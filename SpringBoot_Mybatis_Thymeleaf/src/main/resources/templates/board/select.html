@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/fragments/default :: head('Board Select')">
+<head th:include="/fragments/default :: head('Board Select')">
 <meta charset="UTF-8">
 <title>Home</title>
 </head>
 <body>
+<div th:replace="/fragments/default :: header"></div>
 
-	<div th:replace="fragments/default :: header"></div>
+<div th:replace="/fragments/default :: jumbo"></div>
+<div class="container">
+	<h2 th:text="${vo.title}"></h2>
+	<!-- utext HTML 문법을 적용한 텍스트 -->
+	<h2 th:utext="${vo.contents}"></h2>
 	
-	<div th:replace="fragments/default :: jumbo"></div>
+	<a th:href="@{./update(num=${vo.num})}" class="btn btn-success">Update</a>
+	<a th:href="@{./delete(num=${vo.num})}" class="btn btn-danger">Delete</a>
+	<a th:href="@{./reply(num=${vo.num})}" class="btn btn-info">Reply</a>
 	
-	<div class="container">
-		<h2 th:text="${vo.title}"></h2>
-		<!-- utest는 HTML 문법은 문법으로 인식하게 해주고 텍스트는 텍스트로 인식 -->
-		<h2 th:utext="${vo.contents}"></h2>
-		
-		<a th:href="@{./update(num=${vo.num})}" class="btn btn-success">Update</a>
-		<a th:href="@{./delete(num=${vo.num})}" class="btn btn-danger">Delete</a>
-		
-		<p th:each="fileVO : ${vo.files}">
-			<!-- <a th:href="@{|/upload/${board}/${fileVO.fileName}|}" th:text="${fileVO.oriName}"></a> -->
-			<a th:href="@{./fileDown(fileName=${fileVO.fileName}, oriName=${fileVO.oriName})}" th:text="${fileVO.oriName}"></a>
-		</p>		
-		
-	</div>
+	<p th:each="fileVO : ${vo.files}">
+		<!-- <a th:href="@{|/upload/${board}/${fileVO.fileName}|}" th:text="${fileVO.oriName}"></a> -->
+		<a th:href="@{./fileDown(fileName=${fileVO.fileName}, oriName=${fileVO.oriName})}" th:text="${fileVO.oriName}"></a>
+	</p>
 	
-	<footer th:replace="/fragments/default :: footer"></footer>
+</div>
+
+<footer th:replace="/fragments/default :: footer"></footer>
 
 </body>
 </html>

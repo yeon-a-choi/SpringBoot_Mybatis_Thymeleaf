@@ -2,17 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/fragments/default :: head(|${board}List|)">
 <meta charset="UTF-8">
-<title>Home</title>
+<title>Member Join</title>
 </head>
 <body>
-	
-	<div th:replace="fragments/default :: header"></div>
-	
-	<div th:replace="fragments/default :: jumbo"></div>
+	<!-- header -->
+	<div th:replace="/fragments/default :: header"></div>
+	<!-- Jumbo -->
+	<div th:replace="/fragments/default :: jumbo"></div>
 	
 	<div class="container">
 		<h2 th:text="${board}"></h2>
-		
 		
 		<!-- 검색 form -->
 		<div class=" d-flex justify-content-start">
@@ -38,87 +37,82 @@
 				</form>
 			</div>
 		</div>
+		<!-- 검색 form -->
 		
 		
-		<!-- Table form -->
 		<table class="table">
-			  <thead class="thead-dark">
-			    <tr>
-			      <th scope="col">Num</th>
-			      <th scope="col">Title</th>
-			      <th scope="col">Writer</th>
-			      <th scope="col">Date</th>
-			      <th scope="col">Hit</th>
-			      <th scope="col">Index</th>
-			      <th scope="col">Count</th>
-			      <th scope="col">Size</th>
-			      <th scope="col">Even</th>
-			      <th scope="col">Odd</th>
-			      <th scope="col">First</th>
-			      <th scope="col">Last</th>
-			      <!-- <th scope="col">Current</th> -->
-			    </tr>
-			  </thead>
-			  <tbody>
-			  		<!-- 상태번호를 담을 변수 : state -->
-			    <tr th:each="vo, state : ${list}">
-			      <th scope="row" th:text="${vo.num}"></th>
-			      <!-- td안에 하나의 태그를 더 넣어야한다면 거기에다가 th속성을 걸어줘야 나옴 -->
-			      							<!-- @{|${board}select|} -->
-			      <td><a href="#" th:href="@{select(num=${vo.num})}" th:text="${vo.title}"></a></td>
-			      <td th:text="${vo.writer}"></td>
-			      <td th:text="${vo.regDate}"></td>
-			      <td th:text="${vo.hit}"></td>
-			      <td th:text="${state.index}"></td> <!-- 인덱스 번호 0부터 시작 / 변수가 다르면 안됨! index여야만 가능 -->
-			      <td th:text="${state.count}"></td> <!-- 횟수 번호 1부터 시작 -->
-			      <td th:text="${state.size}"></td> <!-- 총 갯수 : list의 size와 같다 -->
-			      <td th:text="${state.even}"></td> <!-- 현재 반복의 짝수 여부 -->
-			      <td th:text="${state.odd}"></td> <!-- 현재 반복의 홀수 여부 -->
-			      <td th:text="${state.first}"></td> <!-- 현재 반복이 첫번째 여부 -->
-			      <td th:text="${state.last}"></td> <!-- 현재 반복이 마지막인지 여부 -->
-			     <!-- <td th:text="${state.current}"></td>  현재 요소 -->
-			    </tr>
-			    
-			  </tbody>
-		</table>
-		
-		<!--  <a href="#" class="btn btn-primary" th:href="@{./fileDown}">FileDown</a> -->
-		<a href="#" class="btn btn-primary" th:href="@{./insert}">WRITE</a>
-		
+		  <thead class="thead-dark">
+		    <tr>
+		      <th scope="col">Num</th>
+		      <th scope="col">Title</th>
+		      <th scope="col">Writer</th>
+		      <th scope="col">Date</th>
+		      <th scope="col">Hit</th>
+		      <th scope="col">Index</th>
+		      <th scope="col">Count</th>
+		      <th scope="col">Size</th>
+		      <th scope="col">even</th>
+		      <th scope="col">odd</th>
+		      <th scope="col">first</th>
+		      <th scope="col">last</th>
+		      <!-- <th scope="col">Current</th> -->
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr th:each="vo, state : ${list}">
+		      <th scope="row" th:text="${vo.num}"></th>
+		      				          <!--@{ |${board}select| } -->
+		      				          <!-- paramter 전송 @{URL주소(파라미터명=값, 파라미터명2=값2,...)}  -->
+		      <td th:if="${board != 'notice'}">
+		      	
+		      	<!-- th:if="${vo.depth != 0}" -->
+		      	<span th:if="${vo.depth != 0}" th:each="i : ${#numbers.sequence(1, vo.depth)}" >--</span>
+		      	<a href="#" th:href="@{select(num=${vo.num})}" th:text="${vo.title}">Mark</a>
+		      </td>
+		      
+		      <td th:unless="${board != 'notice'}">
+		      	<a href="#" th:href="@{select(num=${vo.num})}" th:text="${vo.title}">Mark</a>
+		      </td>
+		      
+		      <td th:text="${vo.writer}">Otto</td>
+		      <td th:text="${vo.regDate}">@mdo</td>
+		      <td th:text="${vo.hit}"></td>
+		      <td th:text="${state.index}"></td> <!-- 인덱스 번호 0 부터 시작 -->
+		      <td th:text="${state.count}"></td> <!-- 횟수 번호 1 부터 시작 -->
+		      <td th:text="${state.size}"></td> <!-- 총 갯수  -->
+		      <td th:text="${state.even}"></td> <!-- 현재 반복의 짝수 여부   -->
+		      <td th:text="${state.odd}"></td> <!-- 현재 반복의 홀수 여부   -->
+		      <!-- <td th:text="${state.current}"></td> 현재 요소  -->
+		      <td th:text="${state.first}"></td> <!-- 현재 반복이 첫번째 여부   -->
+		      <td th:text="${state.last}"></td> <!-- 현재 반복이 마지막 여부   -->
+		    </tr>
+		   </tbody>
+		 </table> 
+		 
+		 <a href="#" class="btn btn-primary" th:href="@{./fileDown}">FileDown</a>
+		 <a href="#" class="btn btn-primary" th:href="@{./insert}">WRITE</a>
 	</div>
 	
-	
-	<!--Pageing -->
 	<div class="container d-flex justify-content-center">
-			
-		  <ul class="pagination">	<!-- 삼항 연산자 -->
+		  <ul class="pagination">
+		  
 		  	<li th:classappend="${pager.pre? 'disable':'active'}"  class="page-item">
-		  	
-		  		<!-- 이렇게 하면 a태그가 true면 나옴 -->
-		  		<a th:if="${pager.pre}" class="page-link pager" href="#" th:title="${pager.startNum-1}">pre</a>
-		  		
-		  		<!-- false면 span태그가 보임 -->
-		  		<!-- if else = if unless
-		  				unless 사용시에도 조건식은 사용
-		  				if문에 사용한 조건식과 동일한 조건식 사용 -->
-		  		<span th:unless="${pager.pre}" class="page-link">pre</span>
-		  		
+		  		<a th:if="${pager.pre}" class="page-link pager" href="#" th:title="${pager.startNum-1}">Previous</a>
+		  		<!-- if else ==> if unless 
+		  			 unless 사용시에도 조건식은 사용
+		  			 if문에 사용한 조건식과동일한 조건식 사용
+		  		-->
+		  		<span th:unless="${pager.pre}" class="page-link">Previous</span>
 		  	</li>
-		  							<!-- 유틸리티와 구분하기위해 #붙여줌 -->
-		    <li class="page-item" th:each="i : ${#numbers.sequence(pager.startNum, pager.lastNum)}"><a class="page-link pager" href="#" th:text="${i}" th:title="${i}"></a></li>
-		  	<li class="page-item" th:if="${pager.next}"><a class="page-link pager" href="#" th:title="${pager.lastNum+1}">next</a></li>
+		    <li class="page-item" th:each="i : ${#numbers.sequence(pager.startNum, pager.lastNum)}"><a class="page-link pager" href="#" th:text="${i}" th:title="${i}">Previous</a></li>
+		    <li th:if="${pager.next}" class="page-item"><a class="page-link" href="#" th:title="${pager.lastNum+1}" th>Next</a></li>
 		  </ul>
-	
 	</div>
+	
+	<!-- footer -->
+	<div th:replace="/fragments/default :: footer"></div>
 
-	
-	<footer th:replace="/fragments/default :: footer"></footer>
-	
-	<script type="text/javascript" th:src="@{/js/boardSearch.js}">
-	
-
-	
-	</script>
+<script type="text/javascript" th:src="@{/js/boardSearch.js}"></script>
 
 </body>
 </html>

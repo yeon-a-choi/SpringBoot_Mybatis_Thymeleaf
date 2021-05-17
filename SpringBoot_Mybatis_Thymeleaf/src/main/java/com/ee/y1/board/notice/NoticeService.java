@@ -52,7 +52,7 @@ public class NoticeService implements BoardService{
 				continue;
 			}
 			
-			String fileName = fileManager.save(multipartFile, filePath);
+			String fileName = fileManager.save(filePath, multipartFile);
 			System.out.println("fileName : "+fileName);
 			
 			BoardFileVO boardFileVO = new BoardFileVO();
