@@ -2,6 +2,8 @@ package com.ee.y1.board.notice;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ee.y1.board.BoardVO;
+import com.ee.y1.member.MemberVO;
 import com.ee.y1.util.Pager;
 
 @Controller
@@ -66,22 +69,36 @@ public class NoticeController {
 	
 	//Insert
 	@GetMapping("insert")
-	public String setInsert(Model model)throws Exception{
+	public String setInsert(Model model, HttpSession session)throws Exception{
 		
 		model.addAttribute("vo", new BoardVO());
 		model.addAttribute("action", "insert");
 		
-		return "board/form";
+		Object obj = session.getAttribute("member");
+		MemberVO memberVO = null;
+		String path="common/result";
+		model.addAttribute("msg", "관리자가 아닙니다");
+		model.addAttribute("path", "./list");
+		//if(obj != null) {}
+		if(obj instanceof MemberVO) {
+			memberVO = (MemberVO)obj;
+			
+			if(memberVO.getUsername().equals("admin")) {
+				path="board/form";
+			}
+		}	
+		
+		return path;
 	}
 	
 	@PostMapping("insert")
 	public String setInsert(BoardVO boardVO, MultipartFile [] files)throws Exception{
 		
-		System.out.println(files.length);
+//		System.out.println(files.length);
 		
-		for(MultipartFile f : files) {
-			System.out.println(f.getOriginalFilename());
-		}
+//		for(MultipartFile f : files) {
+//			System.out.println(f.getOriginalFilename());
+//		}
 		
 		int result = noticeService.setInsert(boardVO, files);
 		
