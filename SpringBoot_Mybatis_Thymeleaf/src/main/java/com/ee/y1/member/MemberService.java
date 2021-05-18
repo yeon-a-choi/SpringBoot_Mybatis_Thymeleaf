@@ -1,6 +1,7 @@
 package com.ee.y1.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,6 +15,9 @@ public class MemberService {
 
 	@Autowired
 	private FileManager fileManager;
+	
+	@Value("${member.filePath}")
+	private String filePath;
 
 	// Login
 	public MemberVO memberLogin(MemberVO memberVO) throws Exception {
@@ -29,7 +33,7 @@ public class MemberService {
 		int result = memberMapper.setMemberJoin(memberVO);
 		
 		//2. HDD에 저장
-		String filePath = "upload/member/";
+		String filePath = this.filePath;
 		
 		if(avatar.getSize() != 0) {
 		 
@@ -61,7 +65,7 @@ public class MemberService {
 
 		MemberFileVO memberFileVO = memberMapper.getMemberFile(memberVO);
 
-		String filePath = "upload/member/";
+		String filePath = this.filePath;
 		String fileName; // 어디서 불러와야하지?
 
 		// fileName 들어가야함

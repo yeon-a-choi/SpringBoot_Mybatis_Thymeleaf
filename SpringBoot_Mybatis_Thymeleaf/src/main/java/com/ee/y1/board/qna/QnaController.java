@@ -3,6 +3,7 @@ package com.ee.y1.board.qna;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +19,12 @@ import com.ee.y1.util.Pager;
 @Controller
 @RequestMapping("/qna/**")
 public class QnaController {
+	
 	@Autowired
 	private QnaService qnaService;
+	
+	@Value("${board.qna.filePath}")
+	private String filePath;
 	
 	@ModelAttribute("board")
 	public String getBoard() {
@@ -28,6 +33,9 @@ public class QnaController {
 	
 	@GetMapping("list")
 	public String getList(Pager pager, Model model)throws Exception{
+		
+		System.out.println("FilePath : "+filePath);
+		
 		List<BoardVO> ar = qnaService.getList(pager);
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);
