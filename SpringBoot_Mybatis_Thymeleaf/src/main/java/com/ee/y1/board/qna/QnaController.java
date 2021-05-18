@@ -28,6 +28,12 @@ public class QnaController {
 	
 	@GetMapping("list")
 	public String getList(Pager pager, Model model)throws Exception{
+		
+//		if(pager.getCurPage() %2 == 0) {
+//		//강제 Exception발생
+//		throw new SqlSessionException();
+//	}
+		
 		List<BoardVO> ar = qnaService.getList(pager);
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);

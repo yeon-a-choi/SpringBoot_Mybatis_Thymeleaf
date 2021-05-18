@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,6 +45,12 @@ public class NoticeController {
 	//List
 	@GetMapping("list")
 	public String getList(Model model, Pager pager)throws Exception{
+		
+//		if(pager.getCurPage() %2 == 0) {
+//		//강제 Exception발생
+//		throw new SqlSessionException();
+//	}
+		
 		List<BoardVO> ar = noticeService.getList(pager);
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);
@@ -121,6 +128,35 @@ public class NoticeController {
 		int result = noticeService.setDelete(boardVO);
 		
 		return "redirect:./list";
+	}
+	
+	//Controller에서 Exception을 해결하는 형식은 이것
+					//여기의 예외객체명은 Exception이름을 적는것임
+//	@ExceptionHandler(예외객체명.class)
+//	public String ex1() {
+//		// 코드 진행
+//	}
+					//수학적 오류 Exception
+	@ExceptionHandler(ArithmeticException.class)
+	public String getMath(Model model) {
+		
+		//modelAndview로 보내면 이상하게 값이 안보내짐
+//		mv.addObject("message", "수학적 오류 발생");
+//		mv.setViewName("error/500");
+//		
+//		return mv;
+		
+		model.addAttribute("message", "수학적 오류 발생");
+		
+		return "error/500";
+	}
+	
+					// 부모클래스 호출
+	@ExceptionHandler(Throwable.class)
+	public String getException(Model model) {
+		
+		model.addAttribute("message", "관리자에게 문의");
+		return "error/500";
 	}
 
 }

@@ -2,6 +2,7 @@ package com.ee.y1.board.notice;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSessionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,6 +24,13 @@ public class NoticeService implements BoardService{
 
 	@Override
 	public List<BoardVO> getList(Pager pager) throws Exception {
+		
+		//System.out.println(10/0);
+//		if(pager.getCurPage() %2 == 0) {
+//			//강제 Exception발생
+//			throw new SqlSessionException();
+//		}
+		
 		pager.makeRow();
 		Long totalCount = noticeMapper.getTotalCount(pager);
 		pager.makeNum(totalCount);
