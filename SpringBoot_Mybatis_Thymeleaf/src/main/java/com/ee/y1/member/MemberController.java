@@ -1,10 +1,12 @@
 package com.ee.y1.member;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,9 +63,17 @@ public class MemberController {
 	}
 	
 	@PostMapping("join")
-	public String setmemberJoin(MemberVO memberVO, MultipartFile avatar) throws Exception {
+	public String setJoin(@Valid MemberVO memberVO, Errors errors ,MultipartFile avatar)throws Exception{
+		System.out.println("Join Process" + memberVO.getName().length());
+//		if(errors.hasErrors()) {
+//			return "member/memberJoin";
+//		}
 		
-		int result = memberService.setMemberJoin(memberVO, avatar);
+		if(memberService.memberError(memberVO, errors)) {
+			return "member/memberJoin";
+		}
+		
+		//int result = memberService.setJoin(memberVO, avatar);
 		
 		return "redirect:../";
 	}

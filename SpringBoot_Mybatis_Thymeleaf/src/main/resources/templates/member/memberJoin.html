@@ -1,99 +1,67 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/default :: head ('Member Join')">
+<head th:replace="/fragments/default :: head('MemberJoin')">
 <meta charset="UTF-8">
 <title>Member Join</title>
 </head>
 <body>
-
 	<!-- header -->
-	<div th:replace="fragments/default :: header"></div>
-	
-	<!-- jumbo -->
-	<div th:replace="fragments/default :: jumbo"></div>
-	
-	
+	<div th:replace="/fragments/default :: header"></div>
+	<!-- Jumbo -->
+	<div th:replace="/fragments/default :: jumbo"></div>
 	<!-- /member/memberJoin -->
-	<!-- com.ee.y1.member.MemberController.setJoin -->
-	
+	<!-- com....member.MemberController.setJoin() -->
 	<div class="container mt-2">
-		
-		<br>
-		<h2>Member Join Page</h2>
-		
-		<form id="frm" action="./memberJoin" th:action="@{./join}"  method="post" enctype="multipart/form-data">
-			<!-- ID -->
+		<h2 class="mt-4">Member Join Page</h2>
+
+		<form id="frm" th:object="${memberVO}" action="./join" th:action="@{./join}" method="post" enctype="multipart/form-data">
 			<div class="form-group">
-				<label for="username">ID</label> 
-				<input type="text" required="required" class="form-control" id="username" name="username"
-				aria-describedby="idHelp">
-				<h4 id=idResult></h4>
-				<h4 id=idCheckResult></h4>
+				<label for="id">ID</label> 
+				<input type="text" class="form-control"	id="id" name="username" th:field="*{username}">
+				<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
 				<!-- ID 는 6글자 이상 -->
 			</div>
-			
-			
-			<!-- Password -->
 			<div class="form-group">
-				<label for="password">Password</label> 
-				<input type="password" class="form-control" id="password" name="password">
-				<h4 id="pwResult"></h4>
+				<label for="pw">Password</label> 
+				<input type="password"	class="form-control" id="pw" name="password1" th:field="*{password1}">
+				<p th:if="${#fields.hasErrors('password1')}" th:errors="*{password1}"></p>
 				<!-- PW는 8글자 이상 -->
 			</div>
-			
-			<!-- Password 확인 -->
 			<div class="form-group">
-				<label for="pw">Confirm Password</label> <input type="password"
-					class="form-control pw2Result" id="pw2">
-				<!-- 2번째 비밀번호를 입력했을 때, 같으면 아무일 X, 다르면 값을 지우기 -->
-				<!-- PW 두개는 일치 -->	
+				<label for="pw">Password</label> <input type="password"
+					class="form-control" id="pw2" name="password" th:field="*{password}">
+					<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+			</div>			
+			<div class="form-group">
+				<label for="name">Name</label> 
+				<input type="text" class="form-control etc"	id="name" th:field="*{name}">
+				<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+				<!-- 비어 있으면 X -->
 			</div>	
 			
-			
-			<!-- Name -->
 			<div class="form-group">
-				<label for="name">NAME</label> 
-				<input type="text" class="form-control" id="name" name="name">
-				<!-- 비어 있으면 X -->
+				<label for="email">Email</label> 
+				<input type="email" class="form-control etc" id="email" th:field="*{email}">
+				<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
 			</div>
-			
-			
-			<!-- Phone -->
 			<div class="form-group">
-				<label for="phone">PHONE</label> 
-				<input type="text" class="form-control" id="phone" name="phone">
-				<!-- 비어 있으면 X -->
-			</div>
-			
-			
-			<!-- Email -->
-			<div class="form-group">
-				<label for="email">EMAIL</label> 
-				<input type="text" class="form-control" id="email" name="email">
-				<!-- 비어 있으면 X -->
-			</div>
-			
+				<label for="phone">Phone</label> 
+				<input type="text" class="form-control etc"	id="phone" th:field="*{phone}">
+				<p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
+			</div>		
 			
 			<div class="form-group">
 				<label for="avatar">Avatar</label> 
-				<input type="file" class="form-control etc" id="avatar" name="avatar">
+				<input type="file" class="form-control etc"	id="avatar" name="avatar">
 				<!-- 비어 있으면 X -->
-			</div>
+			</div>	
 			
-			<!-- 이 버튼은 submit이벤트가 내장되어있어 값을 비교하고 보내는것이 아닌 그냥 보내므로 null값이여도 보내서 exception발생시킴 -->
-			<!-- <button type="submit" class="btn btn-primary" id="check">Submit</button> -->
-						
-			<!-- input type으로 만든 버튼은 form 내부/외부 둘 다 작동안함 -->
-			<!-- <input type="button" value="JOIN" class="btn btn-primary">  -->
+			<input type="submit" id="btn" value="JOIN" class="btn btn-primary">
 			
-			<input type="submit" value="JOIN" id="btn" class="btn btn-primary">
-			<!-- button -->
 		</form>
-		
 	</div>
-	
 	<!-- footer -->
-	<footer th:replace="/fragments/default :: footer"></footer>
+	<div th:replace="/fragments/default :: footer"></div>
 
 </body>
 </html>

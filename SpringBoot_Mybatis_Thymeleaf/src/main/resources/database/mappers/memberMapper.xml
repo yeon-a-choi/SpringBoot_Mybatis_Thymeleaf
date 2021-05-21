@@ -26,6 +26,11 @@
 		values(#{username}, #{fileName}, #{oriName})
 	</insert>
 	
+	<!-- getUsername -->
+	<select id="getUsername" parameterType="MemberVO" resultType="MemberVO">
+			select * from member where username=#{username}
+	</select>
+	
   
   
   </mapper>

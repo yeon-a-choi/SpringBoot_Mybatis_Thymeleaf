@@ -3,6 +3,7 @@ package com.ee.y1.member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ee.y1.util.FileManager;
@@ -18,6 +19,39 @@ public class MemberService {
 	
 	@Value("${member.filePath}")
 	private String filePath;
+	
+	
+	//검증 메서드
+		public boolean memberError(MemberVO memberVO, Errors errors)throws Exception{
+			boolean result = false;
+			
+			//기본 제공 검증  결과
+//			if(errors.hasErrors()) {
+//				result = true;
+//			}
+			result = errors.hasErrors();
+			
+			//password가 일치 여부 검증
+			if(!memberVO.getPassword().equals(memberVO.getPassword1())) {
+				errors.rejectValue("password1", "memberVO.password.notEqual");
+							     //(form path, field 명, properties의 code(key));
+				result=true;
+			}
+			
+			//UserName 중복 여부
+			MemberVO checkMember = memberMapper.getUsername(memberVO);
+			//checkMember 가 null이면 중복 X
+			//checkMember 가 null이 아니면 중복
+			if(checkMember != null) {
+				errors.rejectValue("username", "member.id.equal");
+				result = true;
+			}
+			
+			//admin, adminstrator, root
+			
+			
+			return result;
+		}
 
 	// Login
 	public MemberVO memberLogin(MemberVO memberVO) throws Exception {
@@ -55,28 +89,5 @@ public class MemberService {
 		return memberMapper.setMemberJoin(memberVO);
 	}
 
-	// Update
-	public int setMemberUpdate(MemberVO memberVO) throws Exception {
-		return memberMapper.setMemberUpdate(memberVO);
-	}
-
-	// Delete
-	public int setMemberDelete(MemberVO memberVO) throws Exception {
-
-		MemberFileVO memberFileVO = memberMapper.getMemberFile(memberVO);
-
-		String filePath = this.filePath;
-		String fileName; // 어디서 불러와야하지?
-
-		// fileName 들어가야함
-		boolean check = fileManager.delete(filePath, null);
-
-		return memberMapper.setMemberDelete(memberVO);
-	}
-
-	// Id Check(id 중복체크)
-	public MemberVO memberIdCheck(MemberVO memberVO) throws Exception {
-		return memberMapper.memberIdCheck(memberVO);
-	}
 
 }
