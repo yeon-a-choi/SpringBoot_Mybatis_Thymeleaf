@@ -22,5 +22,7 @@ public class MemberVO {
 	@NotEmpty
 	private String email;
 	@NotEmpty
-	private String phone;
+	private String phone;;
+	
+	private boolean enabled;
 }

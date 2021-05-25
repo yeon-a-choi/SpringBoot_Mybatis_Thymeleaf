@@ -1,5 +1,7 @@
 package com.ee.y1.member;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 
 
@@ -16,6 +18,9 @@ public interface MemberMapper {
 	
 	//member username
 	public MemberVO getUsername(MemberVO memberVO)throws Exception;
+	
+	//memer role
+	public int setMemberRole(Map<String, String> map) throws Exception;
 	
 	
 	/* fileUpload */
