@@ -28,8 +28,12 @@ public class MemberService implements UserDetailsService{
 	// Login
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		MemberVO memberVO = new MemberVO();
+		memberVO.setUsername(username);
+		
+		memberVO = memberMapper.memberLogin(memberVO);
+		
+		return memberVO;
 	}
 	
 	

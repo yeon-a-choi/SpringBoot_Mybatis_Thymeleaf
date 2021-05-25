@@ -11,7 +11,7 @@ public interface MemberMapper {
 	/* member */
 	
 	//member Login
-	public MemberVO memberLogin(MemberVO memberVO) throws Exception;
+	public MemberVO memberLogin(MemberVO memberVO);
 	
 	//member Join
 	public int setMemberJoin(MemberVO memberVO) throws Exception;

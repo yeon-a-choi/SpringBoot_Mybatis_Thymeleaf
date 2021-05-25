@@ -33,17 +33,17 @@ public class MemberController {
 		return "member/memberLogin";
 	}
 	
-	@PostMapping("login")
-	public String getLogin(MemberVO memberVO, HttpSession session)throws Exception{
-		
-		memberVO = memberService.memberLogin(memberVO);
-		
-		if(memberVO != null) {
-			session.setAttribute("member", memberVO);
-		}	
-		
-		return "redirect:/";
-	}
+//	@PostMapping("login")
+//	public String getLogin(MemberVO memberVO, HttpSession session)throws Exception{
+//		
+//		memberVO = memberService.memberLogin(memberVO);
+//		
+//		if(memberVO != null) {
+//			session.setAttribute("member", memberVO);
+//		}	
+//		
+//		return "redirect:/";
+//	}
 	
 	
 	//logout
