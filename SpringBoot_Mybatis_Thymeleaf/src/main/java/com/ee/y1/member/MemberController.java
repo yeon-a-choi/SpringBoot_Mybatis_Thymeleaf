@@ -33,7 +33,14 @@ public class MemberController {
 		return "member/memberLogin";
 	}
 	
-//	@PostMapping("login")
+	@GetMapping("memberLoginResult")
+	public String memberLoginResult() throws Exception{
+		System.out.println("login 성공");
+		return "redirect:/";
+	}
+	
+	//이전의 login post
+//	@PostMapping("login") 
 //	public String getLogin(MemberVO memberVO, HttpSession session)throws Exception{
 //		
 //		memberVO = memberService.memberLogin(memberVO);
@@ -72,7 +79,7 @@ public class MemberController {
 			return "member/memberJoin";
 		}
 		
-		//int result = memberService.setJoin(memberVO, avatar);
+		int result = memberService.setMemberJoin(memberVO, avatar);
 		
 		return "redirect:../";
 	}

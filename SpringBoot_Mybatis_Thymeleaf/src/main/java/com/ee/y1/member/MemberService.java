@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +22,10 @@ public class MemberService implements UserDetailsService{
 
 	@Autowired
 	private FileManager fileManager;
+	
+	//패스워드를 암호화시켜주는 메서드
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Value("${member.filePath}")
 	private String filePath;
@@ -64,6 +69,7 @@ public class MemberService implements UserDetailsService{
 			}
 			
 			
+			
 			return result;
 		}
 
@@ -77,6 +83,14 @@ public class MemberService implements UserDetailsService{
 	// Join
 	public int setMemberJoin(MemberVO memberVO, MultipartFile avatar) throws Exception {
 
+		//0. 사전작업
+		//a. password 암호화						//암호화하고싶은걸 넣음
+		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
+		
+		//b. 사용자 계정 활성화
+		memberVO.setEnabled(true);
+		
+		
 		//1. Member Table 저장
 		int result = memberMapper.setMemberJoin(memberVO);
 		
