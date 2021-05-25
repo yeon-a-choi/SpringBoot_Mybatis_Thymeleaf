@@ -7,9 +7,29 @@
   <mapper namespace="com.ee.y1.member.MemberMapper">
   
   	<!-- Login  -->
-	<select id="memberLogin" parameterType="MemberVO" resultType="MemberVO">
-		select * from member where username=#{username} and password=#{password} 	
+	<select id="memberLogin" parameterType="MemberVO" resultMap="getLoginResult">
+		SELECT M.*, R.* 
+		FROM member M LEFT JOIN member_role MR
+		ON M.username = MR.username
+		inner JOIN role R
+		ON MR.id = R.id
+		WHERE M.username=#{username}
+		
 	</select>
+	
+	<resultMap type="MemberVO" id="getLoginResult">
+		<id column="username" property="username"/>
+		<result column="password" property="password"/>
+		<result column="name" property="name"/>
+		<result column="email" property="email"/>
+		<result column="phone" property="phone"/>
+		<result column="enabled" property="enabled"/>
+		<collection property="roles" javaType="java.util.List" ofType="RoleVO">
+			<id column="id" property="id"/>
+			<result column="roleName" property="roleName"/>
+		</collection>
+		
+	</resultMap>
 
 	
 	<!-- member Join -->

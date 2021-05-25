@@ -16,6 +16,20 @@ class MemberMapperTest {
 	private MemberMapper memberMapper; 
 	
 	@Test
+	void getMemberLoginTest() throws Exception{
+		MemberVO memberVO = new MemberVO();
+		memberVO.setUsername("id8");
+		
+		memberVO = memberMapper.memberLogin(memberVO);
+		
+		for(RoleVO roleVO : memberVO.getRoles()) {
+			System.out.println(roleVO.getRoleName());
+		}
+		
+		assertNotNull(memberVO);
+	}
+	
+	//@Test
 	void setMemberRoleTest() throws Exception{
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("username", "id8");

@@ -2,14 +2,19 @@ package com.ee.y1.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ee.y1.util.FileManager;
 
+//Spring security에서 사용하는 Service
+//UserDetailsService 구현 (interface)
 @Service
-public class MemberService {
+public class MemberService implements UserDetailsService{
 
 	@Autowired
 	private MemberMapper memberMapper;
@@ -19,6 +24,13 @@ public class MemberService {
 	
 	@Value("${member.filePath}")
 	private String filePath;
+	
+	// Login
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	//검증 메서드
@@ -47,18 +59,16 @@ public class MemberService {
 				result = true;
 			}
 			
-			//admin, adminstrator, root
-			
 			
 			return result;
 		}
 
-	// Login
-	public MemberVO memberLogin(MemberVO memberVO) throws Exception {
-		memberVO = memberMapper.memberLogin(memberVO);
-
-		return memberVO;
-	}
+	// Login 위의 오버라이드된 메서드가 대체됨
+//	public MemberVO memberLogin(MemberVO memberVO) throws Exception {
+//		memberVO = memberMapper.memberLogin(memberVO);
+//
+//		return memberVO;
+//	}
 
 	// Join
 	public int setMemberJoin(MemberVO memberVO, MultipartFile avatar) throws Exception {
