@@ -52,9 +52,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				//개발자가 만든 로그인폼을 사용하려면 다음과 같이 작성
 				.loginPage("/member/login")
 				.defaultSuccessUrl("/member/memberLoginResult")
+				//Login실패했을 떄
+//				.failureUrl("/member/loginFail")
 				.permitAll()
 				.and()
-			//.logout()	
+			.logout()
+				.logoutUrl("/member/logout")
+				.logoutSuccessUrl("/")
+				.invalidateHttpSession(true)
+				.deleteCookies("JSESSIONID")
+				.permitAll()
 				;
 		
 		
