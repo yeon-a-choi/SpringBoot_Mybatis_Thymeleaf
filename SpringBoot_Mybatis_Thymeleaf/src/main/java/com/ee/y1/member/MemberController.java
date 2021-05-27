@@ -31,6 +31,11 @@ public class MemberController {
 	private MemberService memberService;
 
 	
+	@GetMapping("error")
+	public String error() throws Exception{
+		return "error/error";
+	}
+	
 	//login
 	@GetMapping("login")
 	public String memberLogin() throws Exception{		

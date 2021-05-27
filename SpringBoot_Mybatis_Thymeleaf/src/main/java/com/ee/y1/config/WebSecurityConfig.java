@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.ee.y1.security.SecurityException;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -35,6 +37,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		// URL에 따른 로그인, 권한 설정
 		http
+			.exceptionHandling()
+//				.accessDeniedPage("/member/error")	//error page
+				.accessDeniedHandler(new SecurityException()) //error처리 class
+				.and()
+		
 			.cors().and()
 			.csrf().disable()
 			.authorizeRequests()
@@ -54,6 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.defaultSuccessUrl("/member/memberLoginResult")
 				//Login실패했을 떄
 //				.failureUrl("/member/loginFail")
+//				.failureHandler(null)
 				.permitAll()
 				.and()
 			.logout()
